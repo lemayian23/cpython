@@ -1,3 +1,3 @@
-# No external dependencies required
-# This calculator uses only Python standard library (math, os)
-# Python 3.6+ required
+# External dependencies for enhanced calculator features
+colorama>=0.4.6  # Cross-platform colored terminal output
+requests>=2.31.0  # For currency conversion API
