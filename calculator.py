@@ -375,6 +375,100 @@ def advanced_operations():
         color_print(f"\n❌ Error: {str(e)}", Fore.RED)
 
 # ============================================================================
+# EQUATION SOLVER
+# ============================================================================
+
+def equation_solver():
+    """Solve quadratic and linear equations"""
+    print(f"\n{Fore.GREEN}🧮 EQUATION SOLVER{Fore.RESET}")
+    print("1. Linear Equation (ax + b = 0)")
+    print("2. Quadratic Equation (ax² + bx + c = 0)")
+    print("3. System of 2 Linear Equations")
+    print("0. Back to Main Menu")
+    
+    choice = input("\nEnter choice: ")
+    
+    if choice == '0':
+        return
+    
+    try:
+        if choice == '1':
+            print("\nSolve: ax + b = 0")
+            a = float(input("Enter a: "))
+            b = float(input("Enter b: "))
+            
+            if a == 0:
+                color_print("\n❌ Error: 'a' cannot be zero!", Fore.RED)
+                return
+            
+            x = -b / a
+            color_print(f"\n✅ Solution: x = {x}", Fore.GREEN)
+            add_to_history(f"{a}x + {b} = 0", x)
+        
+        elif choice == '2':
+            print("\nSolve: ax² + bx + c = 0")
+            a = float(input("Enter a: "))
+            b = float(input("Enter b: "))
+            c = float(input("Enter c: "))
+            
+            if a == 0:
+                color_print("\n❌ Error: 'a' cannot be zero for quadratic!", Fore.RED)
+                return
+            
+            discriminant = b**2 - 4*a*c
+            
+            if discriminant > 0:
+                x1 = (-b + math.sqrt(discriminant)) / (2*a)
+                x2 = (-b - math.sqrt(discriminant)) / (2*a)
+                color_print(f"\n✅ Two real solutions:", Fore.GREEN)
+                print(f"   x₁ = {x1}")
+                print(f"   x₂ = {x2}")
+                add_to_history(f"{a}x² + {b}x + {c} = 0", x1)
+            elif discriminant == 0:
+                x = -b / (2*a)
+                color_print(f"\n✅ One real solution: x = {x}", Fore.GREEN)
+                add_to_history(f"{a}x² + {b}x + {c} = 0", x)
+            else:
+                real_part = -b / (2*a)
+                imag_part = math.sqrt(abs(discriminant)) / (2*a)
+                color_print(f"\n✅ Two complex solutions:", Fore.GREEN)
+                print(f"   x₁ = {real_part} + {imag_part}i")
+                print(f"   x₂ = {real_part} - {imag_part}i")
+        
+        elif choice == '3':
+            print("\nSolve system:")
+            print("a₁x + b₁y = c₁")
+            print("a₂x + b₂y = c₂")
+            a1 = float(input("Enter a₁: "))
+            b1 = float(input("Enter b₁: "))
+            c1 = float(input("Enter c₁: "))
+            a2 = float(input("Enter a₂: "))
+            b2 = float(input("Enter b₂: "))
+            c2 = float(input("Enter c₂: "))
+            
+            det = a1*b2 - a2*b1
+            
+            if det == 0:
+                color_print("\n❌ Error: System has no unique solution!", Fore.RED)
+                return
+            
+            x = (c1*b2 - c2*b1) / det
+            y = (a1*c2 - a2*c1) / det
+            
+            color_print(f"\n✅ Solution:", Fore.GREEN)
+            print(f"   x = {x}")
+            print(f"   y = {y}")
+            add_to_history(f"System: x={x}, y={y}", x)
+        
+        else:
+            color_print("\n❌ Invalid choice!", Fore.RED)
+    
+    except ValueError:
+        color_print("\n❌ Error: Please enter valid numbers!", Fore.RED)
+    except Exception as e:
+        color_print(f"\n❌ Error: {str(e)}", Fore.RED)
+
+# ============================================================================
 # CONVERSIONS
 # ============================================================================
 
